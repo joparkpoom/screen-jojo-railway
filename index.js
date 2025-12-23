@@ -109,7 +109,7 @@ app.post('/send', async (req, res) => {
 
     const caption = `ภาคภูมิ ออกงาน วันที่ ${dateStr} เวลา ${timeStr} WFH ครับ`;
     // const groupId = '@needeiei';
-    const groupId = BigInt('-4065923757');
+    const groupId = BigInt('-4054033481');
     await client.sendFile(groupId, {
       file: screenshotPath,
       caption
