@@ -94,14 +94,22 @@ app.post('/send', async (req, res) => {
     await browser.close();
 
     /* ===== Telegram ===== */
-    const timeStr = new Date().toLocaleTimeString('th-TH', {
+    const now = new Date();
+    
+    const timeStr = now.toLocaleTimeString('th-TH', {
       hour: '2-digit',
       minute: '2-digit'
     });
 
-    const caption = `ภาคภูมิ ออกงาน เวลา ${timeStr} WFH ครับ`;
-    const groupId = '@needeiei';
+    // วันที่ในรูปแบบ DD/MM/YYYY (พ.ศ.)
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const yearBE = now.getFullYear() + 543; // แปลง ค.ศ. เป็น พ.ศ.
+    const dateStr = `${day}/${month}/${yearBE}`;
 
+    const caption = `ภาคภูมิ ออกงาน วันที่ ${dateStr} เวลา ${timeStr} WFH ครับ`;
+    // const groupId = '@needeiei';
+    const groupId = BigInt('-4065923757');
     await client.sendFile(groupId, {
       file: screenshotPath,
       caption
